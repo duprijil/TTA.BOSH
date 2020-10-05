@@ -22,8 +22,8 @@ struct RGBImage {
 class Webcam {
 
 public:
-    Webcam(const std::string& device = "/dev/video0", 
-           int width = 640, 
+    Webcam(const std::string& device = "/dev/video0",
+           int width = 640,
            int height = 480);
 
     ~Webcam();
@@ -35,7 +35,7 @@ public:
      * width * height * 3)
      *
      * This call blocks until a frame is available or until the provided
-     * timeout (in seconds). 
+     * timeout (in seconds).
      *
      * Throws a runtime_error if the timeout is reached.
      */
