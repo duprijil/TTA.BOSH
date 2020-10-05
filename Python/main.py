@@ -25,10 +25,10 @@ speed = 0
 angle = 0
 
 def do_work():
+    global msg_code
+    global speed
+    global angle
     while True:
-        global msg_code
-        global speed
-        global angle
         msg = zsock_t.recv()
         floats = msg.decode("utf-8").split(" ")
         msg_code = int(float(floats[0]))
