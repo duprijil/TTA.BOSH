@@ -856,7 +856,7 @@ public:
             }
         }
     }
-    /*
+
         frame(const RGBImage & image):frame(image.width,image.height)
         {
 
@@ -875,7 +875,7 @@ public:
             }
 
         }
-    */
+
     Color * toColorBuffer()
     {
         Color * pixel_buffer = new Color[h*w];

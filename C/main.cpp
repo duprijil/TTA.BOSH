@@ -133,8 +133,7 @@ public:
 
 
             //while(!camera.isDone());
-            RGBImage rgb  = camera.frame();
-            f = new frame(rgb.data,rgb.width,rgb.height);
+            f = new frame(camera.frame());
             //camera.doPhotoAsync();
         }
         else
