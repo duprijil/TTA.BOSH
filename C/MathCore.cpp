@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <utility>
 #include <string.h>
+#include <RGBImage.h>
 #define RAD(A)  (M_PI*((double)(A))/180.0)
 typedef unsigned char uint8_t;
 

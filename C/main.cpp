@@ -1,6 +1,6 @@
 #include <webcam.h>
 #include <raylib.h>
-#include <Brain.cpp>
+#include <Brain.h>
 #include <grab.h>
 
 #include <unistd.h>
@@ -45,8 +45,8 @@ public:
         h = camy;
         f = nullptr;
         source_select = true;
-        camera.doPhotoAsync();
-        zmqIPCPush* zmqSocket = new zmqIPCPush("ipc:///tmp/tta");
+        //camera.doPhotoAsync();
+        zmqSocket = new zmqIPCPush("ipc:///tmp/tta");
     }
 
     void send_info(zmqIPCPush* sock, float speed, float angle, char msg)
@@ -163,9 +163,9 @@ public:
 
             bench.update();
             draw_m.startDraw();
+            
             //SignDetection(draw_m.getColorBuffer(),f);
-
-
+            
             sign_proc_time = bench.getElapsed();
             bench.update();
 

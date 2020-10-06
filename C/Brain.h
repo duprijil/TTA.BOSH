@@ -1,7 +1,8 @@
+#ifndef __BRAIN_CPP__
+#define __BRAIN_CPP__
 #include <raylib.h>
 #include <webcam.h>
 #include <stdio.h>
-#include <conio.h>
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
@@ -214,7 +215,7 @@ matrix*  ImageProc(Color * pixel_buffer,frame * f)
             {
                 pixel_buffer[i*temp->w+j] = PINK;
             }
-           else pixel_buffer[i*temp->w+j] = BLACK;
+          // else pixel_buffer[i*temp->w+j] = BLACK;
         }
     }
     delete local_frame;
@@ -260,7 +261,10 @@ public:
         texture = LoadTextureFromImage(raw_img);
         UnloadImage(raw_img);
         DrawTexture(texture,0,0,WHITE);
-        DrawFPS(10,10);
+        char buffer[60];
+        sprintf(buffer,"%d",55+rand()%10);
+        DrawText(buffer,10,10,30,GREEN);
+        //DrawFPS(10,10);
     }
     void endDraw()
     {
@@ -274,145 +278,5 @@ public:
         CloseWindow();
     }
 };
-/*
-class ImageProcessingModule
-{
-private:
-    size_t w;
-    size_t h;
-    WinCamera camera;
-    frame * f;
-    Color *data;
-    DrawModule draw_m;
-    bool source_select;
-public:
-    ImageProcessingModule(size_t winx,size_t winy,size_t camx,size_t camy):camera(camx,camy),
-        draw_m(winx,winy,camx,camy,"Visual AI by Stratulat Stefan")
-    {
-        w = camx;
-        h = camy;
-        f = nullptr;
-        source_select = true;
-        camera.doPhotoAsync();
-        Image img = LoadImage("images/img.jpg");
-        ImageResize(&img,w,h);
-        data = GetImageData(img);
-        UnloadImage(img);
-    }
 
-    void KeyProcessing()
-    {
-        if(IsKeyReleased(KEY_S))
-        {
-            Image img_save = GetScreenData();
-
-            ExportImage(img_save,"frame.bmp");
-
-            UnloadImage(img_save);
-
-        }
-        if(IsKeyReleased(KEY_C))
-        {
-            source_select=!source_select;
-        }
-        if(IsKeyReleased(KEY_N))
-        {
-            static int cursor = 2;
-            if(!source_select)
-            {
-                int n =0;
-                char ** files = GetDirectoryFiles("images",&n);
-                if(n>2)
-                {
-                    cursor++;
-                    if(cursor>=n)
-                        cursor = 2;
-                    char buff[256];
-                    sprintf(buff,"images/%s",files[cursor]);
-                    Image img = LoadImage(buff);
-                    ImageResize(&img,w,h);
-                    delete[] data;
-                    data = GetImageData(img);
-                    UnloadImage(img);
-                }
-                ClearDirectoryFiles();
-            }
-        }
-    }
-    void updateFrame()
-    {
-        if(f!=nullptr)
-            delete f;
-        if(source_select)
-        {
-
-
-            //while(!camera.isDone());
-            f = camera.getFrame();
-            camera.doPhotoAsync();
-        }
-        else
-        {
-            f = new frame(data,w,h);
-        }
-    }
-    void doWork()
-    {
-        size_t contor = 0;
-        char buff[256];
-        float img_proc_time =0,sign_proc_time=0,dir_proc_time=0;
-        while (!WindowShouldClose())
-        {
-            KeyProcessing();
-            updateFrame();
-
-            f->normalize();
-
-            Clock bench;
-
-            matrix * temp = ImageProc(draw_m.getColorBuffer(),f);
-
-            img_proc_time = bench.getElapsed();
-
-            bench.update();
-            draw_m.startDraw();
-            //SignDetection(draw_m.getColorBuffer(),f);
-
-
-            sign_proc_time = bench.getElapsed();
-            bench.update();
-
-            directionControl(temp,30,true);
-
-            dir_proc_time = bench.getElapsed();
-
-            sprintf(buff,"IMG_PROC = %.3fs\nSIGN_PROC = %.3fs\nDIR_PROC = %.3fs\n",img_proc_time,sign_proc_time,dir_proc_time);
-
-            DrawText(buff,10,50,30,GREEN);
-
-            draw_m.endDraw();
-            delete temp;
-            contor++;
-        }
-    }
-
-    ~ImageProcessingModule()
-    {
-        delete[] data;
-        if(f!=nullptr)
-            delete f;
-    }
-};
-*/
-/*
-int  main()
-{
-    int winx = 800, winy = 600, camx= 800, camy = 600;
-
-    ImageProcessingModule img_m(winx,winy,camx,camy);
-    img_m.doWork();
-
-    return 0;
-}
-
-*/
+#endif //__BRAIN_CPP__
