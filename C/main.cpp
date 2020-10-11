@@ -163,9 +163,9 @@ public:
 
             bench.update();
             draw_m.startDraw();
-            
+
             //SignDetection(draw_m.getColorBuffer(),f);
-            
+
             sign_proc_time = bench.getElapsed();
             bench.update();
 
@@ -202,7 +202,7 @@ public:
 
 int main(void)
 {
-    int winx = 800, winy = 600, camx= 800, camy = 600;
+    int winx = 800/2, winy = 600/2, camx= 800/2, camy = 600/2;
 
     ImageProcessingModule img_m(winx,winy,camx,camy);
     img_m.doWork();
